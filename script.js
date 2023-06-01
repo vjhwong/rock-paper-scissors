@@ -10,17 +10,16 @@ function getComputerChoice() {
   }
 }
 
-let formatString = (string) =>
-  string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-
+function formatString(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
 function playRound(playerSelection, computerSelection) {
-  const formattedPlayerSelection = formatString(playerSelection);
+  formattedPlayerSelection = formatString(playerSelection);
   const winMessage = `You win! ${formattedPlayerSelection} beats ${computerSelection}`;
   const lossMessage = `Ỳou lose! ${computerSelection} beats ${formattedPlayerSelection}`;
   const drawMessage = `No winner, both you and the computer played ${computerSelection}`;
 
   if (formattedPlayerSelection === computerSelection) return drawMessage;
-
   switch (formattedPlayerSelection) {
     case "Rock":
       if (computerSelection === "Scissors") return winMessage;
@@ -34,11 +33,38 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+function updateScore(message, playerScore, computerScore) {
+  if (message.startsWith("You win!")) {
+    playerScore.textContent++;
+  } else if (message.startsWith("You lose!")) {
+    computerScore++;
+  }
+}
+
+function checkWin(playerScore, computerScore) {
+  if (playerScore.textContent == 5 || computerScore.textContent == 5) {
+    if (playerScore.textContent == 5) {
+      console.log("Congratulations, you won!");
+    } else {
+      console.log("Game over! You lost");
+    }
+    rockButton.disabled = true;
+    paperButton.disabled = true;
+    scissorsButton.disabled = true;
+  }
+}
+
 function playGame() {
   const playerSelection = this.id;
   const computerSelection = getComputerChoice();
-  console.log(playRound(playerSelection, computerSelection));
+  message = playRound(playerSelection, computerSelection);
+  updateScore(message, playerScore, computerScore);
+  console.log(message);
+  checkWin(playerScore, computerScore);
 }
+
+let playerScore = document.getElementById("player-score");
+let computerScore = document.getElementById("computer-score");
 
 const rockButton = document.getElementById("rock");
 const paperButton = document.getElementById("paper");
