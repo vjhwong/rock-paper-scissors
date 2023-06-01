@@ -16,7 +16,7 @@ let formatString = (string) =>
 function playRound(playerSelection, computerSelection) {
   const formattedPlayerSelection = formatString(playerSelection);
   const winMessage = `You win! ${formattedPlayerSelection} beats ${computerSelection}`;
-  const lossMessage = `Ỳou lose! ${computerSelection} beats ${formattedPlayerSelection}`;
+  const lossMessage = `You lose! ${computerSelection} beats ${formattedPlayerSelection}`;
   const drawMessage = `No winner, both you and the computer played ${computerSelection}`;
 
   if (formattedPlayerSelection === computerSelection) return drawMessage;
@@ -34,11 +34,16 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function game() {
-  for (let index = 0; index < 10; index++) {
-    let playerSelection = prompt("Enter 'Rock', 'Paper' or 'Scissors'");
-    let computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
-  }
+function playGame() {
+  const playerSelection = this.id;
+  const computerSelection = getComputerChoice();
+  console.log(playRound(playerSelection, computerSelection));
 }
-game();
+
+const rockButton = document.getElementById("rock");
+const paperButton = document.getElementById("paper");
+const scissorsButton = document.getElementById("scissors");
+
+rockButton.addEventListener("click", playGame);
+paperButton.addEventListener("click", playGame);
+scissorsButton.addEventListener("click", playGame);
