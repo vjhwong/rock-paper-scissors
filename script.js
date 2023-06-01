@@ -16,7 +16,7 @@ function formatString(string) {
 function playRound(playerSelection, computerSelection) {
   formattedPlayerSelection = formatString(playerSelection);
   const winMessage = `You win! ${formattedPlayerSelection} beats ${computerSelection}`;
-  const lossMessage = `Ỳou lose! ${computerSelection} beats ${formattedPlayerSelection}`;
+  const lossMessage = `You lose! ${computerSelection} beats ${formattedPlayerSelection}`;
   const drawMessage = `No winner, both you and the computer played ${computerSelection}`;
 
   if (formattedPlayerSelection === computerSelection) return drawMessage;
